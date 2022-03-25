@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddProject from "./components/Project/AddProject";
 import { Provider } from "react-redux";
 import store from "./store";
+import UpdateProject from "./components/Project/UpdateProject";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/" component={Dashboard} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/addProject" component={AddProject} />
+          <Route path="/updateProject/:id" component={UpdateProject} />
         </div>
       </Router>
     </Provider>
