@@ -87,16 +87,16 @@ class AddProject extends Component {
                   <div className="form-group">
                     <textarea
                       className={classNames("form-control form-control-lg", {
-                        "is-invalid": errors.projectIdentifier,
+                        "is-invalid": errors.description,
                       })}
                       placeholder="Project Description"
                       name="description"
                       value={this.state.description}
                       onChange={this.onChange}
                     ></textarea>
-                    {errors.projectIdentifier && (
+                    {errors.description && (
                       <div className="invalid-feedback">
-                        {errors.projectIdentifier}
+                        {errors.description}
                       </div>
                     )}
                   </div>
