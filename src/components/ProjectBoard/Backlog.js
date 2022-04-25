@@ -4,9 +4,32 @@ import ProjectTask from "./ProjectTasks/ProjectTask";
 class Backlog extends Component {
   render() {
     const { project_tasks_prop } = this.props;
-    const task = project_tasks_prop.map((project_task) => (
+    const tasks = project_tasks_prop.map((project_task) => (
       <ProjectTask key={project_task.id} project_task_1={project_task} />
     ));
+
+    let todoItems = [];
+    let inProgressItems = [];
+    let doneItems = [];
+
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].props.project_task_1.status === "TO_DO") {
+        todoItems.push(tasks[i]);
+      }
+
+      if (tasks[i].props.project_task_1.status === "IN_PROGRESS") {
+        inProgressItems.push(tasks[i]);
+      }
+
+      if (tasks[i].props.project_task_1.status === "DONE") {
+        doneItems.push(tasks[i]);
+      }
+    }
+
+    // const todoItems1 = todoItems.map((project_task) => (
+    //   <ProjectTask key={project_task.id} project_task_1={project_task} />
+    // ));
+
     return (
       <div className="container">
         <div className="row">
@@ -20,7 +43,7 @@ class Backlog extends Component {
             {
               // <!-- SAMPLE PROJECT TASK STARTS HERE -->
             }
-            {task}
+            {todoItems}
             {
               // <!-- SAMPLE PROJECT TASK ENDS HERE -->
             }
@@ -31,6 +54,10 @@ class Backlog extends Component {
                 <h3>In Progress</h3>
               </div>
             </div>
+            {inProgressItems}
+            {
+              //[1, <h1 key={1}>test</h1>, 3]
+            }
             {
               // <!-- SAMPLE PROJECT TASK STARTS HERE -->
               // <!-- SAMPLE PROJECT TASK ENDS HERE -->
@@ -42,6 +69,7 @@ class Backlog extends Component {
                 <h3>Done</h3>
               </div>
             </div>
+            {doneItems}
             {
               // <!-- SAMPLE PROJECT TASK STARTS HERE -->
               // <!-- SAMPLE PROJECT TASK ENDS HERE -->

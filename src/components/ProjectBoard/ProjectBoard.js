@@ -7,6 +7,20 @@ import { getBacklog } from "../../actions/backlogActions";
 
 class ProjectBoard extends Component {
   //constructor to handle errors
+  constructor() {
+    super();
+    this.state = {
+      errors: {},
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors !== state.errors) {
+      return { errors: props.errors };
+    }
+
+    return null;
+  }
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -16,6 +30,31 @@ class ProjectBoard extends Component {
   render() {
     const { id } = this.props.match.params;
     const { project_tasks } = this.props.backlog;
+    const { errors } = this.state;
+
+    let BoardContent;
+
+    const boardAlgorithm = (errors, project_tasks) => {
+      if (project_tasks.length < 1) {
+        if (errors.projectNotFound) {
+          return (
+            <div className="alert alert-danger text-center" role="alert">
+              {errors.projectNotFound}
+            </div>
+          );
+        } else {
+          return (
+            <div className="alert alert-info text-center">
+              No Project Tasks on this board
+            </div>
+          );
+        }
+      } else {
+        return <Backlog project_tasks_prop={project_tasks} />;
+      }
+    };
+
+    BoardContent = boardAlgorithm(errors, project_tasks);
 
     return (
       <div className="container">
@@ -23,8 +62,9 @@ class ProjectBoard extends Component {
           <i className="fas fa-plus-circle"> Create Project Task</i>
         </Link>
         <br />
-        <Backlog project_tasks_prop={project_tasks} />
+
         <hr />
+        {BoardContent}
       </div>
     );
   }
@@ -33,10 +73,12 @@ class ProjectBoard extends Component {
 ProjectBoard.propTypes = {
   backlog: PropTypes.object.isRequired,
   getBacklog: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   backlog: state.backlog,
   // backlog2: state.backlog.project_task,
+  errors: state.errors,
 });
 export default connect(mapStateToProps, { getBacklog })(ProjectBoard);
