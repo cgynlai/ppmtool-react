@@ -38,6 +38,7 @@ class AddProject extends Component {
   }
 
   render() {
+    //const { errors } = this.props;
     const { errors } = this.props;
     return (
       <div>
