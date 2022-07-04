@@ -20,6 +20,7 @@ class AddProject extends Component {
   }
 
   //life cycle hooks
+  // haven't finished the code ? 4-Jul-2022
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -39,7 +40,7 @@ class AddProject extends Component {
 
   render() {
     //const { errors } = this.props;
-    const { errors } = this.props;
+    const { errors } = this.state;
     return (
       <div>
         <div className="project">
