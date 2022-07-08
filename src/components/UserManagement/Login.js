@@ -35,10 +35,11 @@ class Login extends Component {
     static getDerivedStateFromProps(props, state) {
         if(props.security.validToken){
             props.history.push("/dashboard");
-            return {
-                username: "",
-            password: ""
-            }
+            // return {
+            //     username: "",
+            // password: ""
+            // }
+            return null;
         }
 
         if(props.errors != state.errors) {

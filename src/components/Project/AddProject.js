@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectActions";
 import classNames from "classnames";
+import isJwtExpired from "../../securityUtils/isJWTExpired";
 
 class AddProject extends Component {
   constructor() {
@@ -36,6 +37,10 @@ class AddProject extends Component {
       end_date: this.state.end_date,
     };
     this.props.createProject(newProject, this.props.history);
+  }
+
+  componentDidMount(){
+    isJwtExpired();
   }
 
   render() {
